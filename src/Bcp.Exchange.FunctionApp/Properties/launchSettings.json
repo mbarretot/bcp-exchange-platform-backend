@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Bcp_Exchange_FunctionApp": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7214",
+      "launchBrowser": false
+    }
+  }
+}
