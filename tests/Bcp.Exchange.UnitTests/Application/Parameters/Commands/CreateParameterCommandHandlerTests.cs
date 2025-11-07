@@ -40,8 +40,8 @@ public class CreateParameterCommandHandlerTests
         };
 
         _parameterRepository
-            .ExistsByCodeAsync(command.Code, Arg.Any<CancellationToken>())
-            .Returns(false);
+            .GetByCodeIncludingInactiveAsync(command.Code, Arg.Any<CancellationToken>())
+            .Returns((Parameter?)null);
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
@@ -52,7 +52,7 @@ public class CreateParameterCommandHandlerTests
 
         await _parameterRepository
             .Received(1)
-            .ExistsByCodeAsync(command.Code, Arg.Any<CancellationToken>());
+            .GetByCodeIncludingInactiveAsync(command.Code, Arg.Any<CancellationToken>());
         await _parameterRepository
             .Received(1)
             .AddAsync(Arg.Any<Parameter>(), Arg.Any<CancellationToken>());
